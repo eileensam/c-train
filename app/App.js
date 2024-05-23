@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, Button } from 'react-native';
 import allWords from '../constants/c_words';
-import { loadGuessedWords, saveGuessedWords } from '../utils/storage';
+import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
 import GuessedWordsList from '../components/GuessedWordsList';
 
@@ -37,11 +37,17 @@ export default function App() {
     setGuess('');
   };
 
+  const handleClearGuesses = async () => {
+    setGuessedWords(new Set());
+    await clearGuessedWords();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Guess the C Word:</Text>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <GuessedWordsList guessedWords={guessedWords} />
+      <Button title="Clear Guesses" onPress={handleClearGuesses} />
     </View>
   );
 }
@@ -52,6 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 50,
   },
   title: {
     fontSize: 24,
