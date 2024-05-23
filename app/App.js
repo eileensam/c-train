@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import allWords from '../assets/c_words';
 
 export default function App() {
@@ -8,28 +9,51 @@ export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [guessedWords, setGuessedWords] = useState(new Set());
 
-  // Function to handle when the user submits their guess
-  const handleGuessSubmit = () => {
-    console.log(`Guess: ${guess.toLowerCase()}`);
-    // Check if guess is a valid word
-    if (allWords.has(guess.toLowerCase())) {
-      // If so, check if it has already been guessed
-      if (guessedWords.has(guess.toLowerCase())) {
-        Alert.alert(`You already guessed ${guess.toLowerCase()}.`);
-      } else {
-        Alert.alert(`Nice!`);
-        guessedWords.add(guess.toLowerCase());
-        setGuessedWords(new Set(guessedWords)); // Update the state
+  useEffect(() => {
+    const loadGuessedWords = async () => {
+      try {
+        const storedGuessedWords = await AsyncStorage.getItem('guessedWords');
+        if (storedGuessedWords !== null) {
+          setGuessedWords(new Set(JSON.parse(storedGuessedWords)));
+        }
+      } catch (e) {
+        console.error('Failed to load guessed words.', e);
       }
+    };
 
-    } else {
-      // If not, alert the user
-      Alert.alert('Invalid word');
-    }
-    // If so, check if it has already been guessed
-    // Clear the input field
-    setGuess('');
-  };
+    loadGuessedWords();
+  }, []);
+
+
+  // Function to handle when the user submits their guess
+    const handleGuessSubmit = async () => {
+      const lowerCaseGuess = guess.toLowerCase();
+      console.log(`Guess: ${lowerCaseGuess}`);
+      // Check if guess is a valid word
+      if (allWords.has(lowerCaseGuess)) {
+        // If so, check if it has already been guessed
+        if (guessedWords.has(lowerCaseGuess)) {
+          Alert.alert(`You already guessed ${lowerCaseGuess}.`);
+        } else {
+          Alert.alert(`Nice!`);
+          const newGuessedWords = new Set(guessedWords);
+          newGuessedWords.add(lowerCaseGuess);
+          setGuessedWords(newGuessedWords);
+
+          // Save to AsyncStorage
+          try {
+            await AsyncStorage.setItem('guessedWords', JSON.stringify(Array.from(newGuessedWords)));
+          } catch (e) {
+            console.error('Failed to save guessed words.', e);
+          }
+        }
+      } else {
+        // If not, alert the user
+        Alert.alert('Invalid word');
+      }
+      // Clear the input field
+      setGuess('');
+    };
 
   return (
     <View style={styles.container}>
