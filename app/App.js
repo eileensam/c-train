@@ -8,18 +8,27 @@ export default function App() {
   // State to track the user's current guess and the index of the current word to guess
   const [guess, setGuess] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [guessedWords, setGuessedWords] = useState(new Set());
 
   // Function to handle when the user submits their guess
   const handleGuessSubmit = () => {
     console.log(`Guess: ${guess}`);
-    const currentWord = allWords[currentIndex];
-    if (guess.toLowerCase() === currentWord) {
-      Alert.alert('Correct!', `The word was "${currentWord}".`);
+    // Check if guess is a valid word
+    if (allWords.has(guess)) {
+      // If so, check if it has already been guessed
+      if (guessedWords.has(guess)) {
+        Alert.alert(`You already guessed ${guess}.`);
+      } else {
+        Alert.alert(`Nice!`);
+        guessedWords.add(guess);
+        setGuessedWords(new Set(guessedWords)); // Update the state
+      }
+
     } else {
-      Alert.alert('Incorrect', `Try again!`);
+      // If not, alert the user
+      Alert.alert('Invalid word');
     }
-    // Move to the next word to guess
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+    // If so, check if it has already been guessed
     // Clear the input field
     setGuess('');
   };
