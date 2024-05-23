@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
-
-// Define an array of English words starting with "C" for the user to guess
-const allWords = new Set(['cat', 'car', 'cake', 'computer', 'cow', 'cloud', 'cup']);
+import allWords from '../assets/c_words';
 
 export default function App() {
   // State to track the user's current guess and the index of the current word to guess
@@ -12,15 +10,15 @@ export default function App() {
 
   // Function to handle when the user submits their guess
   const handleGuessSubmit = () => {
-    console.log(`Guess: ${guess}`);
+    console.log(`Guess: ${guess.toLowerCase()}`);
     // Check if guess is a valid word
-    if (allWords.has(guess)) {
+    if (allWords.has(guess.toLowerCase())) {
       // If so, check if it has already been guessed
-      if (guessedWords.has(guess)) {
-        Alert.alert(`You already guessed ${guess}.`);
+      if (guessedWords.has(guess.toLowerCase())) {
+        Alert.alert(`You already guessed ${guess.toLowerCase()}.`);
       } else {
         Alert.alert(`Nice!`);
-        guessedWords.add(guess);
+        guessedWords.add(guess.toLowerCase());
         setGuessedWords(new Set(guessedWords)); // Update the state
       }
 
