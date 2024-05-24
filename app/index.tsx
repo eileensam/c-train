@@ -11,8 +11,8 @@ export default function Index() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={App} />
-        <Stack.Screen name="GuessedWordsListPage" component={GuessedWordsListPage} />
+        <Stack.Screen name="Home" component={App} options={{ headerShown: false }}/>
+        <Stack.Screen name="GuessedWordsListPage" component={GuessedWordsListPage}options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
