@@ -9,6 +9,7 @@ const GuessInput = ({ guess, setGuess, handleGuessSubmit }) => (
       value={guess}
       placeholder="guess"
       autoCapitalize="none"
+      onSubmitEditing={handleGuessSubmit}
     />
     <TouchableOpacity style={styles.button} onPress={handleGuessSubmit}>
       <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>submit</Text>
