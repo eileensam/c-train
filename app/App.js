@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, ScrollView, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, Button, Image, TouchableOpacity } from 'react-native';
 import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
@@ -64,7 +64,9 @@ export default function App() {
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <GuessedWordsList guessedWords={guessedWords} />
-      <Button title="Clear Guesses" onPress={handleClearGuesses} titleStyle={{ fontFamily: 'TrainFont' }}/>
+    <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
+      <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
+    </TouchableOpacity>
     </View>
   );
 }
@@ -93,4 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 10
   },
+  buttonText: {
+    color: '#0065bd',
+  }
 });
