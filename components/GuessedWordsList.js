@@ -1,16 +1,19 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import allWords from '../constants/c_words';
 
 const GuessedWordsList = ({ guessedWords }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Guessed Words:</Text>
+      <Text style={styles.title}>Guessed Words: {guessedWords.size} / {allWords.size}</Text>
       <FlatList
-        data={Array.from(guessedWords)}
+        data={Array.from(allWords)}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <View style={styles.wordItem}>
-            <Text style={styles.wordText}>{item}</Text>
+            <Text style={styles.wordText}>
+              {guessedWords.has(item) ? item : '******'}
+            </Text>
           </View>
         )}
       />
