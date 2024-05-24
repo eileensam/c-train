@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
 import allWords from '../constants/c_words';
 
 const GuessedWordsListPage = ({ route, navigation }) => {
@@ -41,12 +41,14 @@ const GuessedWordsListPage = ({ route, navigation }) => {
           </View>
         )}
       />
+      <View style={styles.footerContainer}>
       <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
           </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>go back</Text>
           </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -71,6 +73,10 @@ const styles = StyleSheet.create({
   },
   wordText: {
     fontSize: 18,
+  },
+  footerContainer: {
+    flexDirection: 'row', // Align items horizontally
+    justifyContent: 'space-between', // Align items on opposite sides
   },
 });
 

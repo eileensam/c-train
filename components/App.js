@@ -43,7 +43,9 @@ export default function App({navigation}) {
         await saveGuessedWords(newGuessedWords);
       }
     } else {
+        if (word == '') {
       Alert.alert('Invalid word');
+        }
     }
     setGuess('');
   };
@@ -60,7 +62,7 @@ export default function App({navigation}) {
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
     <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords })}>
-            <Text>View Guessed Words</Text>
+            <Text style={[{ fontFamily: 'TrainFont' }]}>view guessed words</Text>
           </TouchableOpacity>
     </View>
   );
