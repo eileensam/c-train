@@ -4,12 +4,22 @@ import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
 import GuessedWordsList from '../components/GuessedWordsList';
+import * as Font from 'expo-font';
 
 export default function App() {
   const [guess, setGuess] = useState('');
   const [guessedWords, setGuessedWords] = useState(new Set());
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  async function loadFonts() {
+    await Font.loadAsync({
+      'TrainFont': require('../assets/fonts/nycta-r46.ttf'),
+    });
+    setFontsLoaded(true);
+  }
 
   useEffect(() => {
+      loadFonts();
     const fetchGuessedWords = async () => {
       const loadedGuessedWords = await loadGuessedWords();
       setGuessedWords(loadedGuessedWords);
@@ -44,7 +54,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Guess the C Word:</Text>
+      <Text style={styles.title, { fontFamily: 'TrainFont' }}>C TRAIN</Text>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <GuessedWordsList guessedWords={guessedWords} />
       <Button title="Clear Guesses" onPress={handleClearGuesses} />
