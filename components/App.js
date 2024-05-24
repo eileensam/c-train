@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, Alert, ScrollView, Button, Image, TouchableOpac
 import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
-import GuessedWordsList from '../components/GuessedWordsList';
+import GuessedWordsListPage from '../components/GuessedWordsListPage';
 import * as Font from 'expo-font';
 
-export default function App() {
+
+export default function App({navigation}) {
   const [guess, setGuess] = useState('');
   const [guessedWords, setGuessedWords] = useState(new Set());
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -47,27 +48,6 @@ export default function App() {
     setGuess('');
   };
 
-  const handleClearGuesses = async () => {
-    Alert.alert(
-      'Clear Guesses',
-      'Are you sure you want to clear all guessed words?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: async () => {
-            setGuessedWords(new Set());
-            await clearGuessedWords();
-          },
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
   return (
     <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -79,10 +59,9 @@ export default function App() {
           <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>TRAIN</Text>
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
-      <GuessedWordsList guessedWords={guessedWords} />
-    <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
-      <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
-    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords })}>
+            <Text>View Guessed Words</Text>
+          </TouchableOpacity>
     </View>
   );
 }
