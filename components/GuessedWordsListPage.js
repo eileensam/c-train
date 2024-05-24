@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import allWords from '../constants/c_words';
 
-const GuessedWordsListPage = ({ route }) => {
+const GuessedWordsListPage = ({ route, navigation }) => {
   const { guessedWords } = route.params;
 
   const handleClearGuesses = async () => {
@@ -44,6 +44,9 @@ const GuessedWordsListPage = ({ route }) => {
       <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
           </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>go back</Text>
+          </TouchableOpacity>
     </View>
   );
 };
@@ -52,7 +55,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: 20,
+    paddingTop: 50,
+    paddingHorizontal: 20, // Add horizontal padding
+    paddingVertical: 30, // Add vertical padding
   },
   title: {
     fontSize: 20,
