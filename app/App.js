@@ -48,8 +48,24 @@ export default function App() {
   };
 
   const handleClearGuesses = async () => {
-    setGuessedWords(new Set());
-    await clearGuessedWords();
+    Alert.alert(
+      'Clear Guesses',
+      'Are you sure you want to clear all guessed words?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            setGuessedWords(new Set());
+            await clearGuessedWords();
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
