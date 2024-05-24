@@ -1,4 +1,5 @@
-allWords = new Set(["cab",
+allWords = new Set([
+"cab",
 "cabal",
 "cabana",
 "cabaret",
@@ -4417,6 +4418,7 @@ allWords = new Set(["cab",
 "czechization",
 "czechizations",
 "czechoslovakia",
-"czerniak"])
+"czerniak"
+])
 
 export default allWords
