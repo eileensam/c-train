@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#0065bd',
     padding: 10,
     borderRadius: 5,
     marginLeft: 10,

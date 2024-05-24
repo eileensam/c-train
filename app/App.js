@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, Button, Image } from 'react-native';
 import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
@@ -54,7 +54,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>C TRAIN</Text>
+        <View style={styles.headerContainer}>
+          <Image
+            key={1}
+            source={require('../assets/images/c_train_logo.png')}
+            style={styles.image}
+          />
+          <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>TRAIN</Text>
+        </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <GuessedWordsList guessedWords={guessedWords} />
       <Button title="Clear Guesses" onPress={handleClearGuesses} titleStyle={{ fontFamily: 'TrainFont' }}/>
@@ -63,6 +70,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row', // Align items horizontally
+    alignItems: 'center', // Center items vertically
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -75,5 +86,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginBottom: 20,
+  },
+  image: {
+    width: 60, // Adjust this value to change the image size
+    height: 60, // Adjust this value to change the image size
+    marginBottom: 20,
+    marginRight: 10
   },
 });
