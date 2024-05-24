@@ -5,13 +5,14 @@ import allWords from '../constants/c_words';
 const GuessedWordsList = ({ guessedWords }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Guessed Words: {guessedWords.size} / {allWords.size}</Text>
+      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>GUESSED WORDS</Text>
+      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>{guessedWords.size} / {allWords.size}</Text>
       <FlatList
         data={Array.from(allWords)}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <View style={styles.wordItem}>
-            <Text style={styles.wordText}>
+            <Text style={[styles.wordText, { fontFamily: 'TrainFont' }]}>
               {guessedWords.has(item) ? item : '******'}
             </Text>
           </View>

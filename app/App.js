@@ -54,10 +54,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title, { fontFamily: 'TrainFont' }}>C TRAIN</Text>
+      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>C TRAIN</Text>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <GuessedWordsList guessedWords={guessedWords} />
-      <Button title="Clear Guesses" onPress={handleClearGuesses} />
+      <Button title="Clear Guesses" onPress={handleClearGuesses} titleStyle={{ fontFamily: 'TrainFont' }}/>
     </View>
   );
 }
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30, // Add vertical padding
   },
   title: {
-    fontSize: 24,
+    fontSize: 40,
     marginBottom: 20,
   },
 });

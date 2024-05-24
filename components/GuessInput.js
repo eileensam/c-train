@@ -4,14 +4,14 @@ import { TextInput, TouchableOpacity, Text, StyleSheet, View } from 'react-nativ
 const GuessInput = ({ guess, setGuess, handleGuessSubmit }) => (
   <View style={styles.container}>
     <TextInput
-      style={styles.input}
+      style={[styles.input, { fontFamily: 'TrainFont' }]}
       onChangeText={setGuess}
       value={guess}
-      placeholder="Enter your guess"
+      placeholder="guess"
       autoCapitalize="none"
     />
     <TouchableOpacity style={styles.button} onPress={handleGuessSubmit}>
-      <Text style={styles.buttonText}>Submit</Text>
+      <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>submit</Text>
     </TouchableOpacity>
   </View>
 );
