@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
-const FeedbackForm = () => {
+const FeedbackForm = ({navigation}) => {
   const [feedback, setFeedback] = useState('');
 
   const handleSubmit = async () => {
@@ -45,6 +45,9 @@ const FeedbackForm = () => {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>submit</Text>
       </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('Home', {  })}>
+        <Text style={styles.navLinks}>home</Text>
+    </TouchableOpacity>
     </View>
   );
 };
@@ -84,6 +87,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'TrainFont',
   },
+      navLinks: {
+        color: '#0065bd',
+        marginBottom: 20,
+        marginTop: 20,
+        textAlign: 'center',
+        fontFamily: 'TrainFont',
+      }
 });
 
 export default FeedbackForm;
