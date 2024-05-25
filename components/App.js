@@ -4,6 +4,7 @@ import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
 import GuessedWordsListPage from '../components/GuessedWordsListPage';
+import AboutPage from '../components/AboutPage';
 import * as Font from 'expo-font';
 
 
@@ -62,7 +63,10 @@ export default function App({navigation}) {
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
     <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords })}>
-            <Text style={[{ fontFamily: 'TrainFont' }]}>view guessed words</Text>
+            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
+          </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('AboutPage', {  })}>
+            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>about</Text>
           </TouchableOpacity>
     </View>
   );
@@ -94,5 +98,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#0065bd',
+  },
+  navLinks: {
+    color: '#0065bd',
+    marginBottom: 20,
   }
 });
