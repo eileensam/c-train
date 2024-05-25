@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const AboutPage = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>About</Text>
       <Text style={[styles.content, { fontFamily: 'TrainFont' }]}>
-        Born out of boredom waiting for the MTA C train to come, the purpose of C Train is simple: try to guess as many words starting with c as you can.
+        born out of boredom waiting for the mta C train to come, the purpose of C train is simple: try to guess as many words starting with C as you can.
       </Text>
+    <TouchableOpacity onPress={() => navigation.navigate('Home', {  })}>
+            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>home</Text>
+          </TouchableOpacity>
     </View>
   );
 };
@@ -28,6 +30,12 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 10,
   },
+  navLinks: {
+    color: '#0065bd',
+    marginBottom: 20,
+    marginTop: 20,
+    textAlign: 'center',
+  }
 });
 
 export default AboutPage;
