@@ -6,6 +6,7 @@ import GuessInput from '../components/GuessInput';
 import GuessedWordsListPage from '../components/GuessedWordsListPage';
 import AboutPage from '../components/AboutPage';
 import * as Font from 'expo-font';
+import ProgressBar from '../components/ProgressBar';
 
 
 export default function App({navigation}) {
@@ -62,6 +63,7 @@ export default function App({navigation}) {
           <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>TRAIN</Text>
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
+    <ProgressBar guessedWords={guessedWords} />
     <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords })}>
             <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
           </TouchableOpacity>
