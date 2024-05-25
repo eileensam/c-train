@@ -8,8 +8,11 @@ const AboutPage = ({ route, navigation }) => {
         born out of boredom waiting for the mta C train to come, the purpose of C train is simple: try to guess as many words starting with C as you can.
       </Text>
     <TouchableOpacity onPress={() => navigation.navigate('Home', {  })}>
-            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>home</Text>
-          </TouchableOpacity>
+        <Text style={styles.navLinks}>home</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('FeedbackForm', {  })}>
+        <Text style={styles.navLinks}>feedback</Text>
+    </TouchableOpacity>
     </View>
   );
 };
@@ -35,6 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
+    fontFamily: 'TrainFont',
   }
 });
 
