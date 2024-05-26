@@ -60,7 +60,7 @@ const GuessedWordsListPage = ({ route, navigation }) => {
           </TouchableOpacity>
     <TouchableOpacity onPress={() => {
     console.log(guessedWords.size)
-    navigation.navigate('Home', { guessedWords: guessedWords})}}>
+    navigation.navigate('Home', { guessedWords: Array.from(guessedWords)})}}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>home</Text>
           </TouchableOpacity>
       </View>
