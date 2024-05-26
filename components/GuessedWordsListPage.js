@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
 import allWords from '../constants/c_words';
+import {clearGuessedWords, loadGuessedWords } from '../utils/storage';
 
 const GuessedWordsListPage = ({ route, navigation }) => {
-  const { guessedWords } = route.params;
+  const { guessedWordsArray } = route.params;
+  const [guessedWords, setGuessedWords] = useState(new Set(guessedWordsArray) || []);
+
+  useEffect(() => {
+    const fetchGuessedWords = async () => {
+      console.log("In useEffect")
+      const words = await loadGuessedWords();
+      setGuessedWords(words);
+//      console.log(words.size)
+    };
+
+    fetchGuessedWords();
+  }, []);
 
   const handleClearGuesses = async () => {
     Alert.alert(
@@ -45,7 +58,9 @@ const GuessedWordsListPage = ({ route, navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
           </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.goBack()}>
+    <TouchableOpacity onPress={() => {
+    console.log(guessedWords.size)
+    navigation.navigate('Home', { guessedWords: guessedWords})}}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>home</Text>
           </TouchableOpacity>
       </View>

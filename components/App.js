@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, ScrollView, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
 import GuessInput from '../components/GuessInput';
-import GuessedWordsListPage from '../components/GuessedWordsListPage';
-import AboutPage from '../components/AboutPage';
 import * as Font from 'expo-font';
 import ProgressBar from '../components/ProgressBar';
 
-
-export default function App({navigation}) {
+export default function App() {
   const [guess, setGuess] = useState('');
   const [guessedWords, setGuessedWords] = useState(new Set());
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const navigation = useNavigation();
+  const route = useRoute();
 
   async function loadFonts() {
     await Font.loadAsync({
@@ -22,14 +22,19 @@ export default function App({navigation}) {
   }
 
   useEffect(() => {
-      loadFonts();
+    loadFonts();
     const fetchGuessedWords = async () => {
       const loadedGuessedWords = await loadGuessedWords();
       setGuessedWords(loadedGuessedWords);
     };
-
     fetchGuessedWords();
   }, []);
+
+  useEffect(() => {
+    if (route.params?.guessedWords) {
+      setGuessedWords(new Set(route.params.guessedWords));
+    }
+  }, [route.params?.guessedWords]);
 
   const handleGuessSubmit = async () => {
     const lowerCaseGuess = guess.toLowerCase();
@@ -38,46 +43,44 @@ export default function App({navigation}) {
       if (guessedWords.has(lowerCaseGuess)) {
         Alert.alert(`You already guessed ${lowerCaseGuess}.`);
       } else {
-        Alert.alert(`Nice!`);
+        Alert.alert('Nice!');
         const newGuessedWords = new Set(guessedWords);
         newGuessedWords.add(lowerCaseGuess);
         setGuessedWords(newGuessedWords);
         await saveGuessedWords(newGuessedWords);
       }
     } else {
-        if (word == '') {
       Alert.alert('Invalid word');
-        }
     }
     setGuess('');
   };
 
   return (
     <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Image
-            key={1}
-            source={require('../assets/images/c_train_logo.png')}
-            style={styles.image}
-          />
-          <Text style={styles.title}>TRAIN</Text>
-        </View>
+      <View style={styles.headerContainer}>
+        <Image
+          key={1}
+          source={require('../assets/images/c_train_logo.png')}
+          style={styles.image}
+        />
+        <Text style={styles.title}>TRAIN</Text>
+      </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
-    <ProgressBar guessedWords={guessedWords} />
-    <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords })}>
-            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
-          </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate('AboutPage', {  })}>
-            <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>about</Text>
-          </TouchableOpacity>
+      <ProgressBar guessedWords={guessedWords} />
+      <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords: Array.from(guessedWords) })}>
+        <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('AboutPage')}>
+        <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>about</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: 'row', // Align items horizontally
-    alignItems: 'center', // Center items vertically
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   container: {
     flex: 1,
@@ -85,8 +88,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50,
-    paddingHorizontal: 20, // Add horizontal padding
-    paddingVertical: 30, // Add vertical padding
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   title: {
     fontSize: 40,
@@ -94,10 +97,10 @@ const styles = StyleSheet.create({
     fontFamily: 'TrainFont',
   },
   image: {
-    width: 60, // Adjust this value to change the image size
-    height: 60, // Adjust this value to change the image size
+    width: 60,
+    height: 60,
     marginBottom: 20,
-    marginRight: 10
+    marginRight: 10,
   },
   buttonText: {
     color: '#0065bd',
