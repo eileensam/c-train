@@ -3,27 +3,33 @@ import { StyleSheet } from 'react-native';
 export const colors = {
   primary: '#0F0F0F', // Dark gray
   secondary: '#0065bd', // C train blue
-  accent: '#FFBF00', // LED sign amber
+  accent: '#f9f251', // LED sign amber
   white: '#ffffff',
   black: '#000000'
 };
 
 export const globalStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.primary,
-    padding: 20,
-  },
+     flex: 1,
+     backgroundColor: colors.primary,
+     alignItems: 'center',
+     justifyContent: 'center',
+     paddingTop: 50,
+     paddingHorizontal: 20,
+     paddingVertical: 30,
+   },
   text: {
     color: colors.white,
     fontSize: 16,
     fontFamily: 'TrainFont',
+    paddingTop: 30,
   },
   title: {
     color: colors.accent,
     fontSize: 40,
     fontWeight: 'bold',
     fontFamily: 'TrainFont',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: colors.secondary,
@@ -48,4 +54,14 @@ export const globalStyles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
   },
+  link: {
+    color: colors.accent,
+  },
+  footerContainer: {
+     backgroundColor: colors.primary,
+     alignItems: 'center',
+     justifyContent: 'center',
+     paddingTop: 50,
+     paddingHorizontal: 20,
+   },
 });

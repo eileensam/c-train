@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { globalStyles, colors } from './globalStyles';
 
 const AboutPage = ({ route, navigation }) => {
 
@@ -8,27 +9,29 @@ const AboutPage = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>About</Text>
-      <Text style={[styles.content, { fontFamily: 'TrainFont' }]}>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.title}>about</Text>
+      <Text style={globalStyles.text}>
         born out of boredom waiting for the mta c train to come, the purpose of c train is simple: try to guess as many words starting with c as you can.
       </Text>
-      <Text style={[styles.content, { fontFamily: 'TrainFont' }]}>
+      <Text style={globalStyles.text}>
         the list of words was fed with {' '}
-         <Text style={styles.link} onPress={handleLinkPress}>
-          duke university's list of english words
+         <Text style={globalStyles.link} onPress={handleLinkPress}>
+          this list of english words
          </Text>
          .
       </Text>
-      <Text style={[styles.content, { fontFamily: 'TrainFont' }]}>
+      <Text style={globalStyles.text}>
         if you think of a word that should be on the list or have other feedback, feel free to submit it by tapping the feedback button below.
       </Text>
+      <View style={globalStyles.footerContainer}>
     <TouchableOpacity onPress={() => navigation.navigate('Home', {  })}>
-        <Text style={styles.navLinks}>home</Text>
+        <Text style={globalStyles.buttonText}>home</Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate('FeedbackForm', {  })}>
-        <Text style={styles.navLinks}>feedback</Text>
+        <Text style={globalStyles.buttonText}>feedback</Text>
     </TouchableOpacity>
+    </View>
     </View>
   );
 };
@@ -59,7 +62,6 @@ const styles = StyleSheet.create({
   },
   link: {
     textDecorationLine: 'underline',
-    color: '#0065bd',
   },
 });
 

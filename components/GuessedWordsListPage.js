@@ -58,7 +58,7 @@ const GuessedWordsListPage = ({ route, navigation }) => {
           style={styles.flatList}
         />
       </View>
-      <View style={styles.footerContainer}>
+      <View style={globalStyles.footerContainer}>
         <TouchableOpacity onPress={handleClearGuesses}>
           <Text style={globalStyles.buttonText}>clear guesses</Text>
         </TouchableOpacity>
