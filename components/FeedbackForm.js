@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 20,
+    marginTop: 20,
   },
   buttonText: {
     color: '#fff',

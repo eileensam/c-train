@@ -73,5 +73,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'TrainFont',
     backgroundColor: colors.primary, // Set the background color of the input box
     color: colors.white,
+    width: '100%',
   },
 });
