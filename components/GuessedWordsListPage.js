@@ -9,10 +9,8 @@ const GuessedWordsListPage = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchGuessedWords = async () => {
-      console.log("In useEffect")
       const words = await loadGuessedWords();
       setGuessedWords(words);
-//      console.log(words.size)
     };
 
     fetchGuessedWords();
@@ -40,9 +38,10 @@ const GuessedWordsListPage = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>GUESSED WORDS</Text>
-      <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>{guessedWords.size} / {allWords.size}</Text>
+  <View style={styles.container}>
+    <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>GUESSED WORDS</Text>
+    <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>{guessedWords.size} / {allWords.size}</Text>
+    <View style={styles.listContainer}>
       <FlatList
         data={Array.from(allWords)}
         keyExtractor={(item) => item}
@@ -54,6 +53,7 @@ const GuessedWordsListPage = ({ route, navigation }) => {
           </View>
         )}
       />
+    </View>
       <View style={styles.footerContainer}>
       <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
@@ -64,21 +64,27 @@ const GuessedWordsListPage = ({ route, navigation }) => {
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>home</Text>
           </TouchableOpacity>
       </View>
-    </View>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#fff',
     flex: 1,
-    width: '100%',
     paddingTop: 50,
     paddingHorizontal: 20, // Add horizontal padding
     paddingVertical: 30, // Add vertical padding
   },
+  listContainer: {
+    backgroundColor: '#f0f0f0',
+    flex: 1,
+    width: '100%',
+    paddingHorizontal: 20,// Add vertical padding
+  },
   title: {
     fontSize: 20,
-    marginBottom: 10,
+    marginBottom: 30,
     fontWeight: 'bold',
   },
   wordItem: {
@@ -89,7 +95,15 @@ const styles = StyleSheet.create({
   wordText: {
     fontSize: 18,
   },
+  buttonText: {
+      color: '#0065bd',
+      padding: 10,
+      borderWidth: 1,
+      borderColor: '#0065bd',
+      fontFamily: 'TrainFont',
+    },
   footerContainer: {
+    paddingVertical: 30,
     flexDirection: 'row', // Align items horizontally
     justifyContent: 'space-between', // Align items on opposite sides
   },
