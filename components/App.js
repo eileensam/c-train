@@ -6,6 +6,7 @@ import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/
 import GuessInput from '../components/GuessInput';
 import * as Font from 'expo-font';
 import ProgressBar from '../components/ProgressBar';
+import { globalStyles, colors } from './globalStyles';
 
 export default function App() {
   const [guess, setGuess] = useState('');
@@ -69,15 +70,15 @@ export default function App() {
           source={require('../assets/images/c_train_logo.png')}
           style={styles.image}
         />
-        <Text style={styles.title}>TRAIN</Text>
+        <Text style={[globalStyles.title, styles.title]}>TRAIN</Text>
       </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <ProgressBar guessedWords={guessedWords} />
       <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords: Array.from(guessedWords) })}>
-        <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
+        <Text style={[globalStyles.buttonText, { fontFamily: 'TrainFont' }]}>view guessed words</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('AboutPage')}>
-        <Text style={[styles.navLinks, { fontFamily: 'TrainFont' }]}>about</Text>
+        <Text style={[globalStyles.buttonText, { fontFamily: 'TrainFont' }]}>about</Text>
       </TouchableOpacity>
     </View>
   );
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0F0F0F',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50,
@@ -98,9 +99,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   title: {
-    fontSize: 40,
     marginBottom: 20,
-    fontFamily: 'TrainFont',
   },
   image: {
     width: 60,
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#0065bd',
   },
   navLinks: {
-    color: '#0065bd',
+    color: '#FFBF00',
     marginBottom: 20,
   }
 });

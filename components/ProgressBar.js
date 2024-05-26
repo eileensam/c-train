@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import allWords from '../constants/c_words';
+import { globalStyles, colors } from './globalStyles';
 
 const ProgressBar = ({ guessedWords }) => {
   const progress = guessedWords.size / allWords.size;
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
     fontFamily: 'TrainFont',
+    color: colors.white,
   },
 });
 

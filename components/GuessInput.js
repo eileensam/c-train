@@ -1,10 +1,12 @@
 import React from 'react';
 import { TextInput, TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { globalStyles, colors } from './globalStyles';
 
 const GuessInput = ({ guess, setGuess, handleGuessSubmit }) => (
   <View style={styles.container}>
     <TextInput
-      style={[styles.input, { fontFamily: 'TrainFont' }]}
+      style={[styles.input, globalStyles.text]}
+      placeholderTextColor={colors.white}
       onChangeText={setGuess}
       value={guess}
       placeholder="guess"
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.white,
     borderRadius: 5,
     padding: 10,
     flex: 1,
