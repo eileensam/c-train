@@ -46,7 +46,7 @@ const GuessedWordsListPage = ({ route, navigation }) => {
             <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
           </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>go back</Text>
+            <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>home</Text>
           </TouchableOpacity>
       </View>
     </View>

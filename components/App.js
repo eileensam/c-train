@@ -60,7 +60,7 @@ export default function App({navigation}) {
             source={require('../assets/images/c_train_logo.png')}
             style={styles.image}
           />
-          <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>TRAIN</Text>
+          <Text style={styles.title}>TRAIN</Text>
         </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
     <ProgressBar guessedWords={guessedWords} />
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginBottom: 20,
+    fontFamily: 'TrainFont',
   },
   image: {
     width: 60, // Adjust this value to change the image size
