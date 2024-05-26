@@ -11,7 +11,7 @@ const FeedbackForm = ({navigation}) => {
     }
 
     try {
-      const response = await fetch('https://formspree.io/f/{form_id}', {
+      const response = await fetch('https://formspree.io/f/xleqkozw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
