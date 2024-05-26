@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const colors = {
-  primary: '#333333', // Dark gray
+  primary: '#0F0F0F', // Dark gray
   secondary: '#0065bd', // C train blue
   accent: '#FFBF00', // LED sign amber
   white: '#ffffff',

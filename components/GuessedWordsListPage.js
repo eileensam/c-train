@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import allWords from '../constants/c_words';
-import {clearGuessedWords, loadGuessedWords } from '../utils/storage';
+import { clearGuessedWords, loadGuessedWords } from '../utils/storage';
+import { globalStyles, colors } from './globalStyles';
 
 const GuessedWordsListPage = ({ route, navigation }) => {
   const { guessedWordsArray } = route.params;
@@ -37,75 +38,69 @@ const GuessedWordsListPage = ({ route, navigation }) => {
     );
   };
 
-  return (
-  <View style={styles.container}>
-    <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>GUESSED WORDS</Text>
-    <Text style={[styles.title, { fontFamily: 'TrainFont' }]}>{guessedWords.size} / {allWords.size}</Text>
-    <View style={styles.listContainer}>
-      <FlatList
-        data={Array.from(allWords)}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => (
-          <View style={styles.wordItem}>
-            <Text style={[styles.wordText, { fontFamily: 'TrainFont' }]}>
-              {guessedWords.has(item) ? item : '******'}
-            </Text>
-          </View>
-        )}
-      />
+  const renderItem = ({ item }) => (
+    <View style={styles.wordItem}>
+      <Text style={[styles.wordText, { fontFamily: 'TrainFont' }]}>
+        {guessedWords.has(item) ? item : '******'}
+      </Text>
     </View>
-      <View style={styles.footerContainer}>
-      <TouchableOpacity style={styles.button} onPress={handleClearGuesses}>
-            <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>clear guesses</Text>
-          </TouchableOpacity>
-    <TouchableOpacity onPress={() => {
-    console.log(guessedWords.size)
-    navigation.navigate('Home', { guessedWords: Array.from(guessedWords)})}}>
-            <Text style={[styles.buttonText, { fontFamily: 'TrainFont' }]}>home</Text>
-          </TouchableOpacity>
+  );
+
+  return (
+    <View style={globalStyles.container}>
+      <Text style={[globalStyles.title, styles.title]}>GUESSED WORDS</Text>
+      <Text style={[globalStyles.title, styles.title]}>{guessedWords.size} / {allWords.size}</Text>
+      <View style={styles.listContainer}>
+        <FlatList
+          data={Array.from(allWords)}
+          keyExtractor={(item) => item}
+          renderItem={renderItem}
+          style={styles.flatList}
+        />
       </View>
-  </View>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity onPress={handleClearGuesses}>
+          <Text style={globalStyles.buttonText}>clear guesses</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          console.log(guessedWords.size);
+          navigation.navigate('Home', { guessedWords: Array.from(guessedWords) });
+        }}>
+          <Text style={globalStyles.buttonText}>home</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 20, // Add horizontal padding
-    paddingVertical: 30, // Add vertical padding
-  },
   listContainer: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.primary,
     flex: 1,
     width: '100%',
-    paddingHorizontal: 20,// Add vertical padding
+    paddingHorizontal: 20,
+  },
+  flatList: {
+    backgroundColor: colors.primary,
   },
   title: {
     fontSize: 20,
     marginBottom: 30,
-    fontWeight: 'bold',
+    textAlign: 'center',
   },
   wordItem: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: colors.accent,
   },
   wordText: {
     fontSize: 18,
+    color: colors.white,
   },
-  buttonText: {
-      color: '#0065bd',
-      padding: 10,
-      borderWidth: 1,
-      borderColor: '#0065bd',
-      fontFamily: 'TrainFont',
-    },
   footerContainer: {
     paddingVertical: 30,
-    flexDirection: 'row', // Align items horizontally
-    justifyContent: 'space-between', // Align items on opposite sides
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
