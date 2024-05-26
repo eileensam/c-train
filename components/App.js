@@ -37,7 +37,13 @@ export default function App() {
   }, [route.params?.guessedWords]);
 
   const handleGuessSubmit = async () => {
-    const lowerCaseGuess = guess.toLowerCase();
+    const lowerCaseGuess = guess.toLowerCase().trim();
+
+    // Check if the guess is empty and return early if it is
+    if (lowerCaseGuess === '') {
+      return;
+    }
+
     console.log(`Guess: ${lowerCaseGuess}`);
     if (allWords.has(lowerCaseGuess)) {
       if (guessedWords.has(lowerCaseGuess)) {
@@ -50,7 +56,7 @@ export default function App() {
         await saveGuessedWords(newGuessedWords);
       }
     } else {
-      Alert.alert('Invalid word');
+      Alert.alert('Invalid word.');
     }
     setGuess('');
   };
