@@ -5,7 +5,7 @@ import { globalStyles, colors } from './globalStyles';
 const GuessInput = ({ guess, setGuess, handleGuessSubmit }) => (
   <View style={styles.container}>
     <TextInput
-      style={[styles.input]}
+      style={[globalStyles.input]}
       placeholderTextColor={colors.white}
       onChangeText={setGuess}
       value={guess}

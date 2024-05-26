@@ -72,6 +72,6 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     fontFamily: 'TrainFont',
     backgroundColor: colors.primary, // Set the background color of the input box
-    color: colors.text,
+    color: colors.white,
   },
 });
