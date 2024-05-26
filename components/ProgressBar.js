@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginBottom: 20,
+    paddingTop: 20,
   },
   progressBar: {
     flexDirection: 'row',

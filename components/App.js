@@ -74,12 +74,14 @@ export default function App() {
       </View>
       <GuessInput guess={guess} setGuess={setGuess} handleGuessSubmit={handleGuessSubmit} />
       <ProgressBar guessedWords={guessedWords} />
+      <View style={globalStyles.footerContainer}>
       <TouchableOpacity onPress={() => navigation.navigate('GuessedWordsListPage', { guessedWords: Array.from(guessedWords) })}>
         <Text style={globalStyles.buttonText}>view guessed words</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('AboutPage')}>
         <Text style={globalStyles.buttonText}>about</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 }
