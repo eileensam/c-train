@@ -5,7 +5,7 @@ import { globalStyles, colors } from './globalStyles';
 const GuessInput = ({ guess, setGuess, handleGuessSubmit }) => (
   <View style={styles.container}>
     <TextInput
-      style={[styles.input, globalStyles.text]}
+      style={[styles.input]}
       placeholderTextColor={colors.white}
       onChangeText={setGuess}
       value={guess}
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     flex: 1,
+    fontFamily: 'TrainFont',
   },
   button: {
     backgroundColor: '#0065bd',

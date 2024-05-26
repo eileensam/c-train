@@ -64,4 +64,14 @@ export const globalStyles = StyleSheet.create({
      paddingTop: 50,
      paddingHorizontal: 20,
    },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.white,
+    borderRadius: 5,
+    padding: 10,
+    flex: 1,
+    fontFamily: 'TrainFont',
+    backgroundColor: colors.primary, // Set the background color of the input box
+    color: colors.text,
+  },
 });

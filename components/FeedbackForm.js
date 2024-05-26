@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { globalStyles, colors } from './globalStyles';
 
 const FeedbackForm = ({navigation}) => {
   const [feedback, setFeedback] = useState('');
@@ -33,20 +34,21 @@ const FeedbackForm = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>feedback form</Text>
+    <View style={globalStyles.container}>
+      <Text style={[styles.title, globalStyles.title]}>feedback</Text>
       <TextInput
-        style={[styles.input, styles.textArea]}
-        placeholder="your feedback"
+        style={[globalStyles.input, styles.textArea]}
+        placeholder="your feedback..."
+        placeholderTextColor={colors.white}
         value={feedback}
         onChangeText={setFeedback}
         multiline
       />
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      <TouchableOpacity style={[styles.button, globalStyles.button]} onPress={handleSubmit}>
         <Text style={styles.buttonText}>submit</Text>
       </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate('Home', {  })}>
-        <Text style={styles.navLinks}>home</Text>
+        <Text style={globalStyles.buttonText}>home</Text>
     </TouchableOpacity>
     </View>
   );
@@ -77,10 +79,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   button: {
-    backgroundColor: '#0065bd',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
+    marginBottom: 20,
   },
   buttonText: {
     color: '#fff',
