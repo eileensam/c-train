@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import allWords from '../constants/c_words';
 import { loadGuessedWords, saveGuessedWords, clearGuessedWords } from '../utils/storage';
@@ -63,6 +63,7 @@ export default function App() {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image
@@ -83,6 +84,7 @@ export default function App() {
       </TouchableOpacity>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 

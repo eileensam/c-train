@@ -40,7 +40,7 @@ const GuessedWordsListPage = ({ route, navigation }) => {
 
   const renderItem = ({ item }) => (
     <View style={styles.wordItem}>
-      <Text style={[styles.wordText, { fontFamily: 'TrainFont' }]}>
+      <Text style={[styles.wordText, { fontFamily: 'TrainFont' }, guessedWords.has(item) && styles.guessedWordText]}>
         {guessedWords.has(item) ? item : '******'}
       </Text>
     </View>
@@ -97,10 +97,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.white,
   },
-  footerContainer: {
-    paddingVertical: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  guessedWordText: {
+    color: colors.secondary,
   },
 });
 
